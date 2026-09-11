@@ -43,3 +43,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "enable_monitoring_port" {
+  description = "Ouvre le port TCP 9100"
+  type        = bool
+  default     = false
+}
