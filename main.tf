@@ -21,7 +21,17 @@ resource "aws_security_group" "this" {
       cidr_blocks = ["0.0.0.0/0"]
     }
   }
+  dynamic "ingress" {
+    for_each = var.enable_monitoring_port ? [1] : []
 
+    content {
+      description = "Monitoring TCP 9100"
+      from_port   = 9100
+      to_port     = 9100
+      protocol    = "tcp"
+      cidr_blocks = [var.admin_cidr]
+    }
+  }
   egress {
     from_port   = 0
     to_port     = 0
